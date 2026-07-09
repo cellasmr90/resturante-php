@@ -83,11 +83,8 @@ include("header.php");
                                 <!-- Casilla para seleccionar el platillo -------------------------------------------->
                                 <td class="text-center">
 
-                                    <input
-                                        class="form-check-input"
-                                        type="checkbox"
-                                        name="platillos[]"
-                                        value="<?php echo $fila['id_platillo']; ?>">
+                                    <input class="form-check-input" type="checkbox" name="platillos[]" value="
+                                    <?php echo $fila['id_platillo']; ?>">
 
                                 </td>
 
@@ -154,7 +151,7 @@ include("header.php");
 
 <?php
 /* ======================================================
-   INCLUIR EL PIE DE PÁGINA
+INCLUIR EL PIE DE PÁGINA
 ====================================================== */
 include("footer.php");
 ?>

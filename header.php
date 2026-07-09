@@ -1,5 +1,4 @@
 <?php
-declare(strict_types=1);
 
 /********** INICIAR LA SESIÓN **********/
 if (session_status() == PHP_SESSION_NONE) {
