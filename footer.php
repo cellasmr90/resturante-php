@@ -34,7 +34,7 @@ Sistema Restaurante de Prueba
 <hr>
 
 
-<div class="text-center text-secondary">
+<div class="text-center text-primary">
 
 
 <i class="bi bi-code-slash"></i>

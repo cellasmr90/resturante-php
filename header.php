@@ -68,7 +68,7 @@ if (session_status() == PHP_SESSION_NONE) {
             <?php } ?>
 
             <!-- BOTÓN PARA CERRAR SESIÓN -->
-            <a class="btn btn-danger btn-sm" href="cerrar_sesion.php">
+            <a class="btn btn-light btn-sm" href="cerrar_sesion.php">
                 Salir
             </a>
 

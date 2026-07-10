@@ -4,7 +4,6 @@ declare(strict_types=1);
 /********** CONEXIÓN A LA BASE DE DATOS **********/
 include("conexion.php");
 
-
 /********** VERIFICAR SI SE SELECCIONÓ UN PLATILLO **********/
 if (isset($_POST['platillos'])) {
 
@@ -19,19 +18,19 @@ if (isset($_POST['platillos'])) {
     foreach ($_POST['platillos'] as $id_platillo) {
 
         // Obtener la cantidad del platillo
-        $cantidad = $_POST["cantidad_" . $id_platillo];
+        $cantidad = $_POST["cantidad" . $id_platillo];
 
-        // Consultar el precio
+        // Consultar el precio del platillo
         $consulta = "SELECT precio FROM platillos WHERE id_platillo = $id_platillo";
 
         $resultado = mysqli_query($conexion, $consulta);
 
         $fila = mysqli_fetch_assoc($resultado);
 
-        // Calcular subtotal
+        // Calcular el subtotal del platillo
         $subtotal = $fila['precio'] * $cantidad;
 
-        // Sumar al total
+        // Sumar el subtotal al total del pedido
         $total += $subtotal;
     }
 
@@ -45,7 +44,7 @@ if (isset($_POST['platillos'])) {
     mysqli_query($conexion, $sql_pedido);
 
 
-    // Obtener el ID del pedido creado
+    /********** OBTENER EL ID DEL PEDIDO CREADO **********/
     $id_pedido = mysqli_insert_id($conexion);
 
 
@@ -53,7 +52,7 @@ if (isset($_POST['platillos'])) {
     foreach ($_POST['platillos'] as $id_platillo) {
 
         // Obtener la cantidad
-        $cantidad = $_POST["cantidad_" . $id_platillo];
+        $cantidad = $_POST["cantidad" . $id_platillo];
 
         // Consultar el precio del platillo
         $consulta = "SELECT precio FROM platillos WHERE id_platillo = $id_platillo";
@@ -62,18 +61,26 @@ if (isset($_POST['platillos'])) {
 
         $fila = mysqli_fetch_assoc($resultado);
 
+        // Guardar el precio
         $precio = $fila['precio'];
 
-        // Insertar el detalle
+
+        // Calcular el subtotal
+        $subtotal = $precio * $cantidad;
+
+        // Insertar el detalle del pedido
         $sql_detalle = "INSERT INTO detalle_pedido
-        (id_pedido,id_platillo,cantidad,precio) VALUES ('$id_pedido','$id_platillo','$cantidad','$precio')";
+        (id_pedido, id_platillo, cantidad, precio, subtotal)
+        VALUES
+        ('$id_pedido','$id_platillo','$cantidad','$precio','$subtotal')";
 
         mysqli_query($conexion, $sql_detalle);
     }
 
 
-    /********** REDIRECCIONAR A PEDIDOS **********/
+    /********** REDIRECCIONAR A LA LISTA DE PEDIDOS **********/
     header("Location: pedidos.php");
+    exit;
 
 } else {
 
